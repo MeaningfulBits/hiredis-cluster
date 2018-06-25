@@ -1,11 +1,11 @@
 
-# HIREDIS-VIP
+# HIREDIS-Cluster
 
-Hiredis-vip is a C client library for the [Redis](http://redis.io/) database.
+Hiredis-Cluster is a C client library for the [Redis](http://redis.io/) database.
 
-Hiredis-vip supported redis cluster.
+Hiredis-Cluster supports redis cluster.
 
-Hiredis-vip fully contained and based on [Hiredis](https://github.com/redis/hiredis) .
+Hiredis-Cluster contains fully and is based on [Hiredis](https://github.com/redis/hiredis) .
 
 ## CLUSTER SUPPORT
 
@@ -105,6 +105,7 @@ void redisClusterAsyncFree(redisClusterAsyncContext *acc);
 
 If you want used but not read the follow, please reference the examples:
 https://github.com/vipshop/hiredis-vip/wiki
+
 GCC Build Command: gcc -v example.c -I /usr/local/include/hiredis-vip/ /usr/local/lib/libhiredis_vip.a
 ## Cluster synchronous API
 
@@ -302,11 +303,9 @@ There are a few hooks that need to be set on the cluster context object after it
 See the `adapters/` directory for bindings to *ae* and *libevent*.
 
 ## AUTHORS
-
+Hiredis-Cluster is based on the following code.
 Hiredis-vip was maintained and used at vipshop(https://github.com/vipshop).
-
 The redis client library part in hiredis-vip is same as hiredis(https://github.com/redis/hiredis).
-
 The redis cluster client library part in hiredis-vip is written by deep(https://github.com/deep011).
 
-Hiredis-vip is released under the BSD license.
+Hiredis-Cluster is released under the BSD license.

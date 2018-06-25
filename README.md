@@ -304,8 +304,11 @@ See the `adapters/` directory for bindings to *ae* and *libevent*.
 
 ## AUTHORS
 Hiredis-Cluster is based on the following code.
+
 Hiredis-vip was maintained and used at vipshop(https://github.com/vipshop).
+
 The redis client library part in hiredis-vip is same as hiredis(https://github.com/redis/hiredis).
+
 The redis cluster client library part in hiredis-vip is written by deep(https://github.com/deep011).
 
 Hiredis-Cluster is released under the BSD license.

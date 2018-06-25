@@ -105,7 +105,7 @@ void redisClusterAsyncFree(redisClusterAsyncContext *acc);
 
 If you want used but not read the follow, please reference the examples:
 https://github.com/vipshop/hiredis-vip/wiki
-
+GCC Build Command: gcc -v example.c -I /usr/local/include/hiredis-vip/ /usr/local/lib/libhiredis_vip.a
 ## Cluster synchronous API
 
 To consume the synchronous API, there are only a few function calls that need to be introduced:

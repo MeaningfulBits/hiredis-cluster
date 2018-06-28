@@ -1,11 +1,12 @@
 
 # HIREDIS-Cluster
+Hiredis-Cluster supports redis clusters.
 
 Hiredis-Cluster is a C client library for the [Redis](http://redis.io/) database.
 
-Hiredis-Cluster supports redis cluster.
-
 Hiredis-Cluster contains fully and is based on [Hiredis](https://github.com/redis/hiredis) .
+
+The goal of Hiredis-Cluster is to merge cluster support into the official redis/hiredis C client code base or to serve as a starting point for code that eventually will.
 
 ## CLUSTER SUPPORT
 
@@ -106,7 +107,11 @@ void redisClusterAsyncFree(redisClusterAsyncContext *acc);
 If you want used but not read the follow, please reference the examples:
 https://github.com/vipshop/hiredis-vip/wiki
 
-GCC Build Command: gcc -v example.c -I /usr/local/include/hiredis-vip/ /usr/local/lib/libhiredis_vip.a
+##Building example-cluster.c
+GCC Build Command: gcc -v -g example-cluster.c -I /usr/local/include/hiredis-vip/ /usr/local/lib/libhiredis_vip.a
+
+./a.out [CIP1:PORT1,CIP2:PORT2] default with no args 127.0.0.1:6379
+
 ## Cluster synchronous API
 
 To consume the synchronous API, there are only a few function calls that need to be introduced:

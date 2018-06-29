@@ -307,6 +307,20 @@ callbacks have been executed. After this, the disconnection callback is executed
 There are a few hooks that need to be set on the cluster context object after it is created.
 See the `adapters/` directory for bindings to *ae* and *libevent*.
 
+## Supported Commands
+Currently the following redis command and thir return messages are supported. Examples can be found in example-cluster.c
+
+-[hmset](https://redis.io/commands/hmset)
+-[hmget](https://redis.io/commands/hmget)
+-[incr](https://redis.io/commands/incr)
+
+## Not Supported
+Currently the following redis commands and their return messages are not supported.
+
+-[Cluster Nodes](https://redis.io/commands/cluster-nodes)
+-[Cluster Info](https://redis.io/commands/cluster-info)
+-[PING](https://redis.io/commands/ping)
+
 ## AUTHORS
 Hiredis-Cluster is based on the following code.
 

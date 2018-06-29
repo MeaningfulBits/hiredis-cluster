@@ -1,14 +1,16 @@
 #include <stdio.h>
 #include <hircluster.h>
 #include <string.h>
+#include <time.h>
+#include <stdlib.h>
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
+    srand(time(NULL));
+    const int randNumber = rand() % 20;
     //Set up CLUSTER_ADDRESS IP:Port String
     char *tempClusterString[1024];
     if (argc > 1){
         int i;
-        printf("%d\n", argc);
         for(i = 1; i < argc; i++) {
             strcat(tempClusterString, argv[i]);
         }
@@ -26,6 +28,7 @@ int main(int argc, char **argv)
     char *field2="field/3";
     char *value2="value/3";
     redisClusterContext *cc;
+    redisReply *reply;
 
     //Set up Redis Cluster Connection
     cc = redisClusterConnect(CLUSTER_ADDRESS,HIRCLUSTER_FLAG_ROUTE_USE_SLOTS);
@@ -35,12 +38,26 @@ int main(int argc, char **argv)
         return -1;
     }
 
-    //Ping
+    //Ping (Unsupported)
+    //Pub/Sub (Unsure)
+    //Cluster Nodes (Unsupported)
+    //Cluster Info (Unsupported)
+
     //Incr
-    //Pub/Sub
+    int incrCounter;
+    for(incrCounter=0; incrCounter < randNumber; incrCounter++) {
+    	reply = redisClusterCommand(cc, "incr ExampleCounter");
+    	if (reply == NULL){
+    		printf("Error with incr, reply is null[%s]\n", cc->errstr);
+		    redisClusterFree(cc);
+		return -1;
+    	}
+   	    printf("INCR[ExampleCounter]:%d\n", reply->integer);
+    	freeReplyObject(reply);
+    }
 
     //hmset
-    redisReply *reply = redisClusterCommand(cc, "hmset %s %s %s %s %s %s %s", key, field, value, field1, value1, field2, value2);
+    reply = redisClusterCommand(cc, "hmset %s %s %s %s %s %s %s", key, field, value, field1, value1, field2, value2);
     if(reply == NULL)
     {
         printf("Error with hmset, reply is null[%s]\n", cc->errstr);
@@ -59,9 +76,9 @@ int main(int argc, char **argv)
         return -1;
     }
     printf("HMGET:\n");
-    int i;
-    for(i = 0; i < reply->elements; i++) {
-        printf("%s\n", reply->element[i]->str);
+    int hmgetCounter;
+    for(hmgetCounter = 0; hmgetCounter < reply->elements; hmgetCounter++) {
+        printf("%s\n", reply->element[hmgetCounter]->str);
     }
     freeReplyObject(reply);
 

@@ -311,14 +311,28 @@ See the `adapters/` directory for bindings to *ae* and *libevent*.
 Currently the following redis command and thir return messages are supported. Examples can be found in example-cluster.c
 
 -[hmset](https://redis.io/commands/hmset)
+
 -[hmget](https://redis.io/commands/hmget)
+
 -[incr](https://redis.io/commands/incr)
+
+-[decr](https://redis.io/commands/decr)
+
+-[del](https://redis.io/commands/del)
+
+-[lrange](https://redis.io/commands/lrange)
+
+-[lpop](https://redis.io/commands/lpop)
+
+-[lpush](https://redis.io/commands/lpush)
 
 ## Not Supported
 Currently the following redis commands and their return messages are not supported.
 
 -[Cluster Nodes](https://redis.io/commands/cluster-nodes)
+
 -[Cluster Info](https://redis.io/commands/cluster-info)
+
 -[PING](https://redis.io/commands/ping)
 
 ## AUTHORS

@@ -42,8 +42,55 @@ int main(int argc, char **argv) {
     //Pub/Sub (Unsure)
     //Cluster Nodes (Unsupported)
     //Cluster Info (Unsupported)
+    
+    //lists
+    int listCounter;
+    //lpush
+    reply = redisClusterCommand(cc, "lpush ExampleList ListValue1 ListValueTwo");
+    if (reply == NULL) {
+        printf("Error with lpush, reply is null[%s]\n", cc->errstr);
+        redisClusterFree(cc);
+        return -1;
+    }
+    printf("Lpush[ExampleList]:%s\n", reply->str);
+    freeReplyObject(reply);
 
-    //Incr
+    //lrange
+    reply = redisClusterCommand(cc, "lrange ExampleList 0  -1");
+    if (reply == NULL) {
+        printf("Error with lrange, reply is null[%s]\n", cc->errstr);
+        redisClusterFree(cc);
+        return -1;
+    }
+    for(listCounter = 0; listCounter < reply->elements; listCounter++) {
+        printf("lrange[ExampleList]:%s\n", reply->element[listCounter]->str);
+    }
+    freeReplyObject(reply);
+
+    //lpop
+    int newCounter;
+    for (newCounter = 0; newCounter < listCounter; newCounter++) {
+        reply = redisClusterCommand(cc, "lpop ExampleList");
+        if (reply == NULL) {
+            printf("Error with lpop, reply is null[%s]\n", cc->errstr);
+            redisClusterFree(cc);
+            return -1;
+        }
+        printf("lpop[ExampleList]:%s\n", reply->str);
+        freeReplyObject(reply);
+    }
+    
+    //del
+    reply = redisClusterCommand(cc, "del ExampleCounter");
+    if (reply == NULL) {
+        printf("Error with del, reply is null[%s]\n", cc->errstr);
+        redisClusterFree(cc);
+        return -1;
+    }
+    printf("del[ExampleCounter]:%d\n", reply->str);
+    freeReplyObject(reply);
+
+    //incr
     int incrCounter;
     for(incrCounter=0; incrCounter < randNumber; incrCounter++) {
     	reply = redisClusterCommand(cc, "incr ExampleCounter");
@@ -54,6 +101,29 @@ int main(int argc, char **argv) {
     	}
    	    printf("INCR[ExampleCounter]:%d\n", reply->integer);
     	freeReplyObject(reply);
+    }
+
+    //del
+    reply = redisClusterCommand(cc, "del ExampleCounter");
+    if (reply == NULL) {
+        printf("Error with del, reply is null[%s]\n", cc->errstr);
+        redisClusterFree(cc);
+        return -1;
+    }
+    printf("del[ExampleCounter]:%d\n", reply->str);
+    freeReplyObject(reply);
+
+    //decr
+    int decrCounter;
+    for(decrCounter=0; decrCounter < randNumber; decrCounter++) {
+        reply = redisClusterCommand(cc, "decr ExampleCounter");
+        if (reply == NULL){
+            printf("Error with decr, reply is null[%s]\n", cc->errstr);
+            redisClusterFree(cc);
+        return -1;
+        }
+        printf("DECR[ExampleCounter]:%d\n", reply->integer);
+        freeReplyObject(reply);
     }
 
     //hmset
